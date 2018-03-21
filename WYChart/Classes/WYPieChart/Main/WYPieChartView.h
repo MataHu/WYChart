@@ -73,6 +73,7 @@ typedef NS_ENUM(NSUInteger, WYPieChartAnimationStyle) {
 @property (nonatomic, weak) id<WYPieChartViewDatasource> datasource;
 
 @property (nonatomic, strong) WYPieChartCalculator *calculator;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 ///////--------------------------------------- Animation ------------------------------------------///////
 
@@ -87,8 +88,13 @@ typedef NS_ENUM(NSUInteger, WYPieChartAnimationStyle) {
 @property (nonatomic) WYPieChartSectorSelectedStyle selectedStyle;
 
 ///////--------------------------------------- Attributes ------------------------------------------///////
-
+/**
+ * 环形图宽度的占圆比例0.1
+ */
 @property (nonatomic, assign) CGFloat innerRadiusRatio;
+/**
+ * 环形图到两边的距离（ps:受到限制父视图宽高的限制）
+ */
 @property (nonatomic, assign) CGFloat innerMargin;
 
 @property (nonatomic) BOOL showInnerCircle;
@@ -98,7 +104,9 @@ typedef NS_ENUM(NSUInteger, WYPieChartAnimationStyle) {
 @property (nonatomic) CGFloat sectorLineWidth;
 
 @property (nonatomic) BOOL fillByGradient;
-
+/**
+ * 标签的样式
+ */
 @property (nonatomic, assign) CGFloat labelsFontSize;
 @property (nonatomic, assign) CGFloat labelsHeight;
 @property (nonatomic, strong) UIColor *labelsTextColor;

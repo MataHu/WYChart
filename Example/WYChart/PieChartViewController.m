@@ -31,12 +31,19 @@
     
     _settingViewController = [[PieChartSettingViewController alloc] init];
     
-    _pieView = [[WYPieChartView alloc] initWithFrame:CGRectMake(0, 70, self.view.wy_boundsWidth, 300)];
+    _pieView = [[WYPieChartView alloc] initWithFrame:CGRectMake(0, 0, self.view.wy_boundsWidth, 240)];
     _pieView.delegate = self;
     _pieView.datasource = self;
-    _pieView.backgroundColor = [UIColor clearColor];
-    
-    
+    _pieView.backgroundColor = [UIColor yellowColor];
+    _pieView.innerRadiusRatio = 0.7;
+    _pieView.style = kWYPieChartNormalStyle;
+    _pieView.selectedStyle = kWYPieChartSectorSelectedExtraction;
+    _pieView.animationStyle = kWYPieChartAnimationOrderlySpreading;
+    _pieView.animationDuration = roundf(1.f);
+    _pieView.fillByGradient = YES;
+    _pieView.showInnerCircle = YES;
+    _pieView.rotatable = NO;
+    _pieView.titleLabel.text = @"总价\n201032";
     _pieView.values = @[@50, @200, @40, @300, @100];
     
     [self.view addSubview:_pieView];
@@ -64,13 +71,13 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    _pieView.style = [_settingViewController.parameters[kPieChartStyle] unsignedIntegerValue];
-    _pieView.selectedStyle = [_settingViewController.parameters[kPieChartSelectedStyle] unsignedIntegerValue];
-    _pieView.animationStyle = [_settingViewController.parameters[kPieChartAnimationStyle] unsignedIntegerValue];
-    _pieView.animationDuration = roundf([_settingViewController.parameters[kPieChartAnimationDuration] floatValue]);
-    _pieView.fillByGradient = [_settingViewController.parameters[kPieChartFillByGradient] boolValue];;
-    _pieView.showInnerCircle = [_settingViewController.parameters[kPieChartShowInnerCircle] boolValue];
-    _pieView.rotatable = [_settingViewController.parameters[kPieChartRotatable] boolValue];
+//    _pieView.style = [_settingViewController.parameters[kPieChartStyle] unsignedIntegerValue];
+//    _pieView.selectedStyle = [_settingViewController.parameters[kPieChartSelectedStyle] unsignedIntegerValue];
+//    _pieView.animationStyle = [_settingViewController.parameters[kPieChartAnimationStyle] unsignedIntegerValue];
+//    _pieView.animationDuration = roundf([_settingViewController.parameters[kPieChartAnimationDuration] floatValue]);
+//    _pieView.fillByGradient = [_settingViewController.parameters[kPieChartFillByGradient] boolValue];;
+//    _pieView.showInnerCircle = [_settingViewController.parameters[kPieChartShowInnerCircle] boolValue];
+//    _pieView.rotatable = [_settingViewController.parameters[kPieChartRotatable] boolValue];
     [_pieView update];
 }
 

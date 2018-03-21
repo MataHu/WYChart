@@ -11,6 +11,7 @@
 #import "WYChartCategory.h"
 #import "WYPieChartForegroundView.h"
 #import "WYPieChartCalculator.h"
+#define DEFAULT_INNER_MARGIN 80
 
 #define DEFAULT_PIE_CHART_MARGIN 50
 
@@ -79,6 +80,15 @@
     _foregroundView.backgroundColor = [UIColor clearColor];
     _foregroundView.parentView = self;
     [self addSubview:_foregroundView];
+    
+    _titleLabel = [[UILabel alloc] initWithFrame:self.bounds];
+    _titleLabel.userInteractionEnabled = false;
+    _titleLabel.backgroundColor = [UIColor clearColor];
+    _titleLabel.textColor = [UIColor grayColor];
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    _titleLabel.font = [UIFont systemFontOfSize:14];
+    _titleLabel.numberOfLines = 0;
+    [self addSubview:_titleLabel];
 }
 
 #pragma mark - setter and getter
@@ -90,6 +100,10 @@
 
 #pragma mark - Update Operation
 - (void)update {
+    // 中间标题
+    CGFloat width = _innerRadiusRatio * (self.wy_boundsWidth - (_innerMargin > 0 ? 2*_innerMargin : 2*DEFAULT_INNER_MARGIN)) / 2;
+    _titleLabel.frame = CGRectMake(_titleLabel.frame.origin.x, _titleLabel.frame.origin.y, width, width);
+    _titleLabel.center = self.wy_boundsCenter;
     
     _sectors = [_calculator createSectorsForValues:_values
                                            atPoint:_pieView.wy_boundsCenter
