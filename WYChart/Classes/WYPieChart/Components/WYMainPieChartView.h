@@ -12,7 +12,9 @@
 
 @interface WYMainPieChartView : UIView
 
-@property (nonatomic, readonly) CGFloat sectorsRadius;
+@property (nonatomic, assign) CGFloat sectorsRadius;
+
+@property (nonatomic, assign) CGFloat innerMargin;
 
 @property (nonatomic, copy) NSArray *sectors;
 

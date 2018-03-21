@@ -11,7 +11,7 @@
 
 #define DEFAULT_MAX_GEAR_DEPTH_RATIO 0.6
 #define DEFAULT_MIN_GEAR_DEPTH_RATIO 0.3
-#define DEFAULT_INNER_RADIUS_RATIO 0.33
+#define DEFAULT_INNER_RADIUS_RATIO 0.3
 
 @implementation WYPieChartCalculator
 
@@ -34,12 +34,12 @@ static NSArray * radiusForGearSector(NSArray *values, CGFloat ratio) {
     return radius;
 }
 
-- (NSArray *)createSectorsForValues:(NSArray *)values atPoint:(CGPoint)point radius:(CGFloat)radius pieStyle:(WYPieChartStyle)style showInnerCircle:(BOOL)showInnerCircle {
+- (NSArray *)createSectorsForValues:(NSArray *)values atPoint:(CGPoint)point radius:(CGFloat)radius pieStyle:(WYPieChartStyle)style showInnerCircle:(BOOL)showInnerCircle innerRadiusRatio:(CGFloat)innerRadiusRatio {
     
-    return [self createSectorsForValues:values atPoint:point radius:radius maxAngle:3*M_PI/2 pieStyle:style showInnerCircle:showInnerCircle];
+    return [self createSectorsForValues:values atPoint:point radius:radius maxAngle:3*M_PI/2 pieStyle:style showInnerCircle:showInnerCircle innerRadiusRatio:innerRadiusRatio];
 }
 
-- (NSArray *)createSectorsForValues:(NSArray *)values atPoint:(CGPoint)point radius:(CGFloat)radius maxAngle:(CGFloat)maxAngle pieStyle:(WYPieChartStyle)style showInnerCircle:(BOOL)showInnerCircle {
+- (NSArray *)createSectorsForValues:(NSArray *)values atPoint:(CGPoint)point radius:(CGFloat)radius maxAngle:(CGFloat)maxAngle pieStyle:(WYPieChartStyle)style showInnerCircle:(BOOL)showInnerCircle innerRadiusRatio:(CGFloat)innerRadiusRatio {
     
     __block CGFloat currentAngle;
     NSMutableArray *sectors;
@@ -48,7 +48,9 @@ static NSArray * radiusForGearSector(NSArray *values, CGFloat ratio) {
     __block CGFloat sectorAngle;
     CGFloat innerRadius;
     
-    innerRadius = radius * DEFAULT_INNER_RADIUS_RATIO;
+    innerRadiusRatio = innerRadiusRatio ? innerRadiusRatio : DEFAULT_INNER_RADIUS_RATIO;
+    
+    innerRadius = radius * innerRadiusRatio;
     valueSum = 0;
     currentAngle = -M_PI_2;
     sectors = [NSMutableArray arrayWithCapacity:values.count];
@@ -66,14 +68,14 @@ static NSArray * radiusForGearSector(NSArray *values, CGFloat ratio) {
         currentSector.vertex = point;
         currentSector.value = [obj floatValue];
         currentSector.outerRadius = radius;
-        currentSector.innerRadius = showInnerCircle ? radius*DEFAULT_INNER_RADIUS_RATIO : 0;
+        currentSector.innerRadius = showInnerCircle ? radius*innerRadiusRatio : 0;
         
         if (style == kWYPieChartGearStyle) {
             if (showInnerCircle) {
                 currentSector.radius = (1 - DEFAULT_MIN_GEAR_DEPTH_RATIO + [gearRadius[idx] floatValue]) * radius;
             } else {
-                currentSector.radius = (1 - DEFAULT_MAX_GEAR_DEPTH_RATIO + [gearRadius[idx] floatValue]) * radius * (1 - DEFAULT_INNER_RADIUS_RATIO)
-                                       + DEFAULT_INNER_RADIUS_RATIO*radius;
+                currentSector.radius = (1 - DEFAULT_MAX_GEAR_DEPTH_RATIO + [gearRadius[idx] floatValue]) * radius * (1 - innerRadiusRatio)
+                                       + innerRadiusRatio*radius;
             }
         } else {
             currentSector.radius = radius;

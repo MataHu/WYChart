@@ -134,7 +134,7 @@
         height = labelHeight > DEFAULT_LABEL_MAX_HEIGHT ? DEFAULT_LABEL_MAX_HEIGHT : labelHeight;
         
         y = endPoint.y - height/2;
-        labelFrame = CGRectMake(x, y, width, height);
+        labelFrame = CGRectMake(x, y, width, _labelsHeight ? _labelsHeight : height);
         currentLabel.frame = labelFrame;
         
         width = width < DEFAULT_LABEL_MIN_WIDTH ? DEFAULT_LABEL_MIN_WIDTH : width;
@@ -144,7 +144,8 @@
 //        currentLabel.alpha = (widthAlpha<heightAlpha)?widthAlpha:heightAlpha;
         
         fontSize = ((widthAlpha<heightAlpha)?widthAlpha:heightAlpha) * DEFAULT_MAX_FONT_SIZE;
-        currentLabel.font = [UIFont systemFontOfSize:fontSize];
+        currentLabel.font = [UIFont systemFontOfSize:_labelsFontSize ? _labelsFontSize : fontSize];
+        
     }
     
     if (!_lineLayer) {

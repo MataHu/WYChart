@@ -13,7 +13,7 @@
 #import "WYSectorLayer.h"
 #import "WYPieChartCalculator.h"
 #define DEGREES_IN_RADIANS(x) (M_PI * x / 180.0)
-#define DEFAULT_INNER_MARGIN 20
+#define DEFAULT_INNER_MARGIN 100
 
 @interface WYMainPieChartView () <UIGestureRecognizerDelegate>
 
@@ -258,9 +258,9 @@
 #pragma mark - getter and setter
 
 - (CGFloat)sectorsRadius {
-    return (self.wy_boundsWidth - 2*DEFAULT_INNER_MARGIN) / 2;
+    
+    return (self.wy_boundsWidth - (2*DEFAULT_INNER_MARGIN)) / 2;
 }
-
 
 #pragma mark - Shape Creating Methor
 
@@ -353,7 +353,7 @@
                                                                 atPoint:self.wy_boundsCenter
                                                                  radius:self.sectorsRadius
                                                                maxAngle:maxAngle
-                                                               pieStyle:_style showInnerCircle:_showInnerCircle];
+                                                               pieStyle:_style showInnerCircle:_showInnerCircle  innerRadiusRatio:_parentView.innerRadiusRatio];
     }
     
     for (int idx = 0; idx < currentSectors.count; ++idx) {

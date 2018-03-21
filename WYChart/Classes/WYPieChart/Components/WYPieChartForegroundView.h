@@ -15,6 +15,8 @@
 
 @property (nonatomic) NSArray *sectors;
 
+@property (nonatomic, assign) CGFloat labelsFontSize;
+@property (nonatomic, assign) CGFloat labelsHeight;
 @property (nonatomic, strong) UIColor *labelsTextColor;
 @property (nonatomic, strong) UIColor *labelsBackgroundColor;
 

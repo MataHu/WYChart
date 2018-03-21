@@ -88,6 +88,9 @@ typedef NS_ENUM(NSUInteger, WYPieChartAnimationStyle) {
 
 ///////--------------------------------------- Attributes ------------------------------------------///////
 
+@property (nonatomic, assign) CGFloat innerRadiusRatio;
+@property (nonatomic, assign) CGFloat innerMargin;
+
 @property (nonatomic) BOOL showInnerCircle;
 
 @property (nonatomic, copy) UIColor *sectorStrokeColor;
@@ -96,6 +99,8 @@ typedef NS_ENUM(NSUInteger, WYPieChartAnimationStyle) {
 
 @property (nonatomic) BOOL fillByGradient;
 
+@property (nonatomic, assign) CGFloat labelsFontSize;
+@property (nonatomic, assign) CGFloat labelsHeight;
 @property (nonatomic, strong) UIColor *labelsTextColor;
 @property (nonatomic, strong) UIColor *labelsBackgroundColor;
 

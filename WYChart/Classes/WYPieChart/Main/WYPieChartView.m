@@ -95,8 +95,9 @@
                                            atPoint:_pieView.wy_boundsCenter
                                             radius:_pieView.sectorsRadius
                                             pieStyle:_style
-                                   showInnerCircle:_showInnerCircle];
-    
+                                   showInnerCircle:_showInnerCircle
+                                  innerRadiusRatio:_innerRadiusRatio];
+    _pieView.innerMargin = _innerMargin;
     _pieView.sectors = _sectors;
     _pieView.strokeColor = _sectorStrokeColor;
     _pieView.lineWidth = _sectorLineWidth;
@@ -114,6 +115,8 @@
     
     _foregroundView.sectors = _sectors;
     _foregroundView.alpha = 0;
+    _foregroundView.labelsFontSize = _labelsFontSize;
+    _foregroundView.labelsHeight = _labelsHeight;
     _foregroundView.labelsTextColor = _labelsTextColor;
     _foregroundView.labelsBackgroundColor = _labelsBackgroundColor;
     if (_animationStyle == kWYPieChartAnimationNone) _foregroundView.alpha = 1;
